@@ -14,12 +14,6 @@ import requests
 
 ### add a annotation for test jenkins
 
-### add a annotation for test jenkins
-
-
-### add a annotation for test jenkins
-
-
 
 @Configuration()
 class TipCommand(StreamingCommand):
