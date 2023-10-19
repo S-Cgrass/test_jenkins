@@ -14,13 +14,7 @@ import requests
 
 ### add a annotation for test jenkins
 ### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
-### add a annotation for test jenkins
+
 
 
 @Configuration()
@@ -117,30 +111,30 @@ class TipCommand(StreamingCommand):
                     record["verbose_msg"] = "ERROR:访问<" + ip_url + "> url 超时!请检查网络.详细内容:" + str(e)
                     yield record
 
-        # #  file/hash
-        # if self.type == "file":
-        #     ip_url = "https://api.threatbook.cn/v3/file/upload"
-        #     for record in records:
-        #         query = {"apikey": self.key, "file": record[self.field]}
-        #         try:
-        #             response = requests.request("GET", url=ip_url, params=query, timeout=5)
-        #             results = response.json()
-        #             self.logger.debug(results)
-        #             if results["response_code"] == 0:
-        #                 for zz in results["data"]:
-        #                     record["response_code"] = results["response_code"]
-        #                     record["verbose_msg"] = results["verbose_msg"]
-        #                     record["sha256"] = results["data"][zz]["sha256"]
-        #                     record["permalink"] = results["data"][zz]["permalink"]
-        #                     self.logger.debug(record)
-        #                     yield record
-        #             else:
-        #                 record["response_code"] = results["response_code"]
-        #                 record["verbose_msg"] = results["verbose_msg"]
-        #                 yield record
-        #         except Exception as e:
-        #             record["response_code"] = "-1"
-        #             record["verbose_msg"] = "ERROR:访问<" + ip_url + "> url 超时!请检查网络.详细内容:" + str(e)
-        #             yield record
+        #  file/hash
+        if self.type == "file":
+            ip_url = "https://api.threatbook.cn/v3/file/upload"
+            for record in records:
+                query = {"apikey": self.key, "file": record[self.field]}
+                try:
+                    response = requests.request("GET", url=ip_url, params=query, timeout=5)
+                    results = response.json()
+                    self.logger.debug(results)
+                    if results["response_code"] == 0:
+                        for zz in results["data"]:
+                            record["response_code"] = results["response_code"]
+                            record["verbose_msg"] = results["verbose_msg"]
+                            record["sha256"] = results["data"][zz]["sha256"]
+                            record["permalink"] = results["data"][zz]["permalink"]
+                            self.logger.debug(record)
+                            yield record
+                    else:
+                        record["response_code"] = results["response_code"]
+                        record["verbose_msg"] = results["verbose_msg"]
+                        yield record
+                except Exception as e:
+                    record["response_code"] = "-1"
+                    record["verbose_msg"] = "ERROR:访问<" + ip_url + "> url 超时!请检查网络.详细内容:" + str(e)
+                    yield record
 
 dispatch(TipCommand, sys.argv, sys.stdin, sys.stdout, __name__)
