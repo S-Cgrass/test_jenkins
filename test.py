@@ -22,3 +22,11 @@ print(content2)
 # print(now_str)
 # print(content2)
 
+print(now)
+print(now_str)
+print(content2)
+print(now)
+print(now_str)
+print(content2)
+
+
