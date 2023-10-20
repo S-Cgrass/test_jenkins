@@ -15,18 +15,4 @@ content2="testmessage" + now_str
 print(now)
 print(now_str)
 print(content2)
-print(now)
-print(now_str)
-print(content2)
-# print(now)
-# print(now_str)
-# print(content2)
-
-print(now)
-print(now_str)
-print(content2)
-print(now)
-print(now_str)
-print(content2)
-
 
